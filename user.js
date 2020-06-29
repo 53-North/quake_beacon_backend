@@ -80,7 +80,7 @@ app.put('/user/:userID', function(req, res) {
           })
         } else {
           res.status(200).json({
-            users: data
+            user: data
           })
         }
       })
@@ -107,7 +107,7 @@ app.delete('/user/:userID', function(req, res) {
           })
         } else {
           res.status(200).json({
-            users: data
+            user: data
           })
         }
       })
@@ -117,13 +117,3 @@ app.delete('/user/:userID', function(req, res) {
 
 
 module.exports.handler = serverless(app);
-
-// module.exports.handler = async (event, context) => {
-//   return {
-//     statusCode: 200,
-//     body: JSON.stringify({
-//       message: "10-4 good buddy",
-//       input: event
-//     })
-//   };
-// };
