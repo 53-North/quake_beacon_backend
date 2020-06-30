@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
 });
 
 app.get("/user", function(req, res) {
-  const query = "SELECT * FROM user;"
+  const query = "SELECT userID, user_firstName, user_lastName, user_phone, user_markedSafe FROM user;"
 
   connection.query(query, function(err, data) {
     if (err) {
@@ -35,10 +35,10 @@ app.get("/user", function(req, res) {
 });
 
 app.post("/user", function(req, res) {
-  const query = "INSERT INTO user (user_email, user_phone, user_language, user_firstName, user_lastName, user_lat, user_long, user_inDangerZone, user_markedSafe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+  const query = "INSERT INTO user (user_phone, user_firstName, user_lastName, user_markedSafe) VALUES (?, ?, ?, ?);";
   const querySelect = "SELECT * FROM user WHERE userID = ?";
 
-  connection.query(query, [req.body.user_email, req.body.user_phone, req.body.user_language, req.body.user_firstName, req.body.user_lastName, req.body.user_lat, req.body.user_long, req.body.user_inDangerZone, req.body.user_markedSafe], function(error, data) {
+  connection.query(query, [req.body.user_phone, req.body.user_firstName, req.body.user_lastName, req.body.user_markedSafe], function(error, data) {
     if(error) {
       console.log("Error adding a user", error);
       res.status(500).json({
@@ -62,10 +62,10 @@ app.post("/user", function(req, res) {
 });
 
 app.put('/user/:userID', function(req, res) {
-  const query = "UPDATE user SET user_email = ?, user_phone = ?, user_language = ?, user_firstName = ?, user_lastName = ?, user_lat = ?, user_long = ?, user_inDangerZone =?, user_markedSafe = ? WHERE userID = ?;";
+  const query = "UPDATE user SET user_phone = ?, user_firstName = ?, user_lastName = ?, user_markedSafe = ? WHERE userID = ?;";
   const querySelect = "SELECT * FROM user WHERE userID = ?";
 
-  connection.query(query, [req.body.user_email, req.body.user_phone, req.body.user_language, req.body.user_firstName, req.body.user_lastName, req.body.user_lat, req.body.user_long, req.body.user_inDangerZone, req.body.user_markedSafe, req.params.userID], function(error, data) {
+  connection.query(query, [req.body.user_phone, req.body.user_firstName, req.body.user_lastName, req.body.user_markedSafe, req.params.userID], function(error, data) {
     if(error) {
       console.log("Error updating a user", error);
       res.status(500).json({
