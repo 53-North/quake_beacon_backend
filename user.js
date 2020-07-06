@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
 });
 
 app.get("/user", function(req, res) {
-  const query = "SELECT userID, user_firstName, user_lastName, user_phone, user_markedSafe FROM user;"
+  const query = "SELECT userID, user_firstName, user_lastName, user_phone, user_email, user_markedSafe FROM user;"
 
   connection.query(query, function(err, data) {
     if (err) {
@@ -114,6 +114,7 @@ app.delete('/user/:userID', function(req, res) {
     }
   })
 });
+
 
 
 module.exports.handler = serverless(app);
