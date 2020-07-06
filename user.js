@@ -34,6 +34,23 @@ app.get("/user", function(req, res) {
   });
 });
 
+app.get("/user/login/:email", function(req, res) {
+  const query = "SELECT * FROM user WHERE user_email= ?";
+
+  connection.query(query, [req.params.email], function(err, data) {
+    if (err) {
+      console.log("Error fetching user", err);
+      res.status(500).json({
+        error: err
+      });
+    } else {
+      res.json({
+        user: data
+      });
+    }
+  });
+});
+
 app.post("/user", function(req, res) {
   const query = "INSERT INTO user (user_phone, user_firstName, user_lastName, user_markedSafe) VALUES (?, ?, ?, ?);";
   const querySelect = "SELECT * FROM user WHERE userID = ?";

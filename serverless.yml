@@ -29,3 +29,7 @@ functions:
           path: user/{userID}
           method: delete
           cors: true
+      - http:
+          path: user/login/{email}
+          method: get
+          cors: true
