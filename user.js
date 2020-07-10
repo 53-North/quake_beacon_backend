@@ -80,7 +80,7 @@ app.post("/user", function(req, res) {
 
 app.put('/user/:userID', function(req, res) {
 
-  const query = "UPDATE user SET user_phone = ?, user_email = ?, user_firstName = ?, user_lastName = ?, user_markedSafe = ?, user_loggedIn WHERE userID = ?;";
+  const query = "UPDATE user SET user_phone = ?, user_email = ?, user_firstName = ?, user_lastName = ?, user_markedSafe = ?, user_loggedIn = ? WHERE userID = ?;";
   const querySelect = "SELECT * FROM user WHERE userID = ?";
 
   connection.query(query, [req.body.user_phone, req.body.user_email, req.body.user_firstName, req.body.user_lastName, req.body.user_markedSafe, req.body.user_loggedIn, req.params.userID], function(error, data) {
